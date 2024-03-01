@@ -1,0 +1,45 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html,body{
+    height:100%;
+    width: 100%;
+    background-color: darkkhaki;
+}
+.timer{
+    text-align:center;
+    font-size:50px;
+}
+.container{
+    display:flex;
+    /* justify-content:center; */
+    align-items:center;
+    flex-direction: column;;   
+}
+
+.content{
+    font-size:large;
+    color:rgb(114, 108, 108);
+    margin:100px 50px 0px;
+    
+}
+
+.correct{
+    color:green;
+}
+.wrong{
+    color:red;
+}
+
+
+
+.correct{
+    color:black;
+    background-color: green;
+}
+.wrong{
+    color:black;
+    background-color: red;
+}
