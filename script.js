@@ -2,7 +2,7 @@ const timer = document.querySelector(".timer")
 const content=document.querySelector(".content")
 const endScreen = document.querySelector(".endScreen")
 var clock
-let time=0;
+let time=31;
 let score=0;
 const wordArr= [
     "apple", "banana", "orange", "grape", "kiwi", "strawberry", "blueberry", "melon", "pineapple", "peach",
@@ -14,10 +14,10 @@ const wordArr= [
 let sentence="";
 function startTime(){
     clock = setInterval(()=>{
-    if(time>5){
+    if(time<1){
         handleStop()
     }else{
-        time+=1;
+        time--;
         timer.innerHTML=time;
     }
 
@@ -79,17 +79,23 @@ function handleStart(){
 
 function handleStop(){
     timer.style.display="none";
-    content.style.display="none";
+    content.style.display="none"; 
+    const speed= score/(30/60);
+    endScreen.innerHTML=`Your speed was ${speed}wpm<br>.press any key to restart`
     endScreen.style.display='block';
-    
+  
+ 
     sentence="";
     clearInterval(clock)
-    time =0;
+    time =30;
     index =0;
     timer.innerHTML=time;
     
     document.removeEventListener("keypress",updateContent)
-    document.addEventListener("keypress",handleStart,{once:true})
+    setTimeout(()=>{
+        document.addEventListener("keypress",handleStart,{once:true})   
+    },1000)
+    
 
 
  
