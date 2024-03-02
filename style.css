@@ -27,22 +27,17 @@ html,body{
     
 }
 
+
+
+
 .correct{
-    color:green;
+    color:black;
+    font:bold;
+    /* background-color:darkgrey; */
 }
 .wrong{
     color:red;
-}
-
-
-
-.correct{
-    color:black;
-    background-color: green;
-}
-.wrong{
-    color:black;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .endScreen{

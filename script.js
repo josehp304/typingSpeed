@@ -81,6 +81,7 @@ function handleStop(){
     timer.style.display="none";
     content.style.display="none"; 
     const speed= score/(30/60);
+    score=0;
     endScreen.innerHTML=`Your speed was ${speed}wpm<br>.press any key to restart`
     endScreen.style.display='block';
   
