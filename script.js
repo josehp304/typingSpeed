@@ -1,6 +1,7 @@
 const timer = document.querySelector(".timer")
 const content=document.querySelector(".content")
-
+const endScreen = document.querySelector(".endScreen")
+var clock
 let time=0;
 let score=0;
 const wordArr= [
@@ -12,9 +13,14 @@ const wordArr= [
   ]
 let sentence="";
 function startTime(){
-   setInterval(()=>{
-    time+=1;
-    timer.innerHTML=time;
+    clock = setInterval(()=>{
+    if(time>5){
+        handleStop()
+    }else{
+        time+=1;
+        timer.innerHTML=time;
+    }
+
    },1000) 
 }
 function genrateRandomSentences(){
@@ -27,7 +33,10 @@ function genrateRandomSentences(){
 
 var index=0;
 function checkLetter(e){
-    
+    if (sentence[index]==" "){
+        score++
+        
+    }
     if (e.key==sentence[index]){
         
         return true
@@ -37,41 +46,63 @@ function checkLetter(e){
     }
     
 }
-genrateRandomSentences()
-
-
-document.addEventListener("keypress",()=>{
-    startTime()
-},{once:true})
-
-document.addEventListener("keypress",(e)=>{
-    
+function updateContent(e){
+    console.log("eventListener still live")
     if (checkLetter(e)){
         sentence=sentence.substring(0,index)+"<span class='correct'>"+sentence.substring(index,index+1)+"</span>"+sentence.substring(index+1)
-        console.log(index)
-        console.log(index+1)
+        
         content.innerHTML=sentence;
-        console.log(sentence)
+        console.log("yes")
+        
         index+=30
-        score++
+        
         
     }else{
         sentence=sentence.substring(0,index)+"<span class='wrong'>"+sentence.substring(index,index+1)+"</span>"+sentence.substring(index+1)
         content.innerHTML=sentence;
-        console.log(index)
+        console.log("no")
         index+=28
+        
     }
-    // change css of single letter using .substring
-    // Update content.innerHTML and sentence based on check letter
-})
+}
+function handleStart(){
+    timer.style.display="";
+    content.style.display="";
+    endScreen.style.display='none';    
+    genrateRandomSentences()
+    timer.style.display=""
+    document.addEventListener("keypress",startTime,{once:true})
 
-// function changeLetterCss(){
-//     sentence=sentence.substring(0,1)+"<span class=correct>"+sentence.substring(1,2)+"</span>"+sentence.substring(2)
-//     content.innerHTML=sentence
-// }
-// changeLetterCss()
-// handleStart - which starts time,generate the content and a loop 
-// updateContent - update content based on input and end and start
-// checkLetter - check if the input letter is correct and change the color of the letter accordingly
-// random content generator - we can set preset sentences and choose a random one form it or generate random words from a database to form a sentence
+    document.addEventListener("keypress",updateContent)
+
+}
+
+function handleStop(){
+    timer.style.display="none";
+    content.style.display="none";
+    endScreen.style.display='block';
+    
+    sentence="";
+    clearInterval(clock)
+    time =0;
+    index =0;
+    timer.innerHTML=time;
+    
+    document.removeEventListener("keypress",updateContent)
+    document.addEventListener("keypress",handleStart,{once:true})
+
+
  
+}
+
+
+handleStart()
+
+
+
+
+
+// count number of words - done
+// make function for starting and ending
+// stop after 60 sec
+// show end screnn with typing speed words per minute 

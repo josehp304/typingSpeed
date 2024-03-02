@@ -11,6 +11,7 @@ html,body{
 .timer{
     text-align:center;
     font-size:50px;
+    color:rgb(114, 108, 108);
 }
 .container{
     display:flex;
@@ -42,4 +43,12 @@ html,body{
 .wrong{
     color:black;
     background-color: red;
+}
+
+.endScreen{
+    display: none;
+    font-size:large;
+    color:rgb(114, 108, 108);
+    margin:100px 50px 0px;
+    
 }
